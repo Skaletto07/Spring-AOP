@@ -2,10 +2,13 @@ package ru.kostkin.spring.demospringv2.aspects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import ru.kostkin.spring.demospringv2.Book;
 
 @Component
 @Aspect
@@ -64,9 +67,28 @@ public class LoggingAspect {
 */
 
 
+    @Before("ru.kostkin.spring.demospringv2.aspects.MyPointcuts.allAddMethods()")
+    public void beforeAddLoggingAdvice(JoinPoint joinPoint) {
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        log.debug("MethodSignature = " + signature);
+        log.debug("MethodSignature.getMethod() = " + signature.getMethod());
+        log.debug("MethodSignature.getReturnType() = " + signature.getReturnType());
+        log.debug("MethodSignature.getName() = " + signature.getName());
 
-    @Before("ru.kostkin.spring.demospringv2.aspects.MyPointcuts.allGetMethods()")
-    public void beforeGetLoggingAdvice() {
+        if (signature.getName().equals("addBook")) {
+            Object[] args = joinPoint.getArgs();
+            for (Object arg : args) {
+                if (arg instanceof Book) {
+                    Book myBook = (Book) arg;
+                    log.debug("about book: name - " + myBook.getName() + ", author - " + myBook.getAuthor() + ", year of publication - "
+                            + myBook.getYearOfPublication());
+                } else if (arg instanceof String) {
+                    log.debug("add book to lib " + arg);
+                }
+            }
+        }
+
+
         log.debug("beforeGetBookAdvice: logging to receive book or magazine!");
     }
 

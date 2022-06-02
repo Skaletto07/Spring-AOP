@@ -12,8 +12,8 @@ import static ru.kostkin.spring.demospringv2.aspects.LoggingAspect.log;
 @Order(30)
 public class ExceptionHandlingAspect {
 
-    @Before("ru.kostkin.spring.demospringv2.aspects.MyPointcuts.allGetMethods()")
-    public void beforeGetExceptionHandlingAdvice() {
+    @Before("ru.kostkin.spring.demospringv2.aspects.MyPointcuts.allAddMethods()")
+    public void beforeAddExceptionHandlingAdvice() {
         log.debug("beforeGetExceptionHandlingAdvice: catch/process exceptions when trying to get book or magazine");
     }
 
