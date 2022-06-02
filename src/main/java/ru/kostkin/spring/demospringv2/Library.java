@@ -9,9 +9,8 @@ public class Library {
         System.out.println("-------------------------------------------");
     }
     public String returnBook() {
-        System.out.println("We return book to lib from lib");
-        System.out.println("-------------------------------------------");
-        return "ok";
+        System.out.println("We return book to lib");
+        return "war and peace";
     }
     public void getMagazine() {
         System.out.println("We get magazine from lib");

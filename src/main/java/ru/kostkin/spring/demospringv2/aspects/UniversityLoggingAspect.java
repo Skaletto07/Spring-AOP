@@ -1,9 +1,6 @@
 package ru.kostkin.spring.demospringv2.aspects;
 
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 import ru.kostkin.spring.demospringv2.Student;
 
@@ -34,10 +31,21 @@ public class UniversityLoggingAspect {
 
         log.debug("afterGetStudentsLoggingAdvice: logging getting list of students after method getStudents()");
     }*/
-    @AfterThrowing(pointcut = "execution(* getStudents())",
+    /*@AfterThrowing(pointcut = "execution(* getStudents())",
     throwing = "exception")
     public void afterThrowingGetStudentsLoggingAdvice(Throwable exception) {
-        log.debug("afterThrowingGetStudentsLoggingAdvice: logging throwing exception" + exception);
+        log.debug("afterThrowingGetStudentsLoggingAdvice: logging throwing an exception" + exception);
 
+    }*/
+
+
+    @After("execution(* getStudents())")
+    public void afterGetStudentsLoggingAdvice() {
+        log.debug("afterGetStudentsLoggingAdvice: logging the normal end of work or throwing an exception");
     }
+
+
+
+
+
 }
