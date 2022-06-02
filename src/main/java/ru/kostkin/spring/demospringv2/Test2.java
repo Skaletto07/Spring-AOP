@@ -4,6 +4,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.util.List;
 
+import static ru.kostkin.spring.demospringv2.aspects.LoggingAspect.log;
+
 
 public class Test2 {
     public static void main(String[] args) {
@@ -11,8 +13,13 @@ public class Test2 {
 
         University university = context.getBean("universityBean", University.class);
         university.addStudents();
-        List<Student> students = university.getStudents();
-        System.out.println(students);
+        try {
+            List<Student> students = university.getStudents();
+            System.out.println(students);
+        } catch (Exception e) {
+            log.debug("An exception was caught " + e);
+        }
+
 
         context.close();
     }
