@@ -9,6 +9,7 @@ public class Library {
         System.out.println("-------------------------------------------");
     }
     public String returnBook() {
+        int a = 10/0;
         System.out.println("We return book to lib");
         return "war and peace";
     }
